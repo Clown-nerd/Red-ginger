@@ -96,4 +96,23 @@
   $('.dialog-close').addEventListener('click',()=>{dialog.close();document.body.style.overflow=''});
   dialog.addEventListener('click',e=>{if(e.target===dialog){dialog.close();document.body.style.overflow=''}});
   dialog.addEventListener('close',()=>document.body.style.overflow='');
+
+  // Cinematic motion layer: intentionally lightweight and disabled for reduced-motion users.
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const orb = $('.cursor-orb');
+    let tx = innerWidth / 2, ty = innerHeight / 2, cx = tx, cy = ty;
+    addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; document.documentElement.style.setProperty('--mx', `${(e.clientX / innerWidth - .5) * 2}`); document.documentElement.style.setProperty('--my', `${(e.clientY / innerHeight - .5) * 2}`); }, {passive:true});
+    const animateCursor = () => { cx += (tx-cx)*.12; cy += (ty-cy)*.12; if (orb) orb.style.transform = `translate3d(${cx}px,${cy}px,0)`; requestAnimationFrame(animateCursor); };
+    animateCursor();
+    const parallax = $$('[data-parallax], .camera-layer');
+    let ticking = false;
+    const updateCamera = () => { const y = scrollY; parallax.forEach(el => { const speed = el.classList.contains('camera-layer') ? .16 : .06; el.style.setProperty('--scroll-y', `${y * speed}px`); }); ticking = false; };
+    addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateCamera); ticking = true; } }, {passive:true});
+    updateCamera();
+    $$('.button, .text-link, .table-card, .food-card, .experience-card').forEach(el => {
+      el.addEventListener('pointerenter', () => el.classList.add('focus-pull'));
+      el.addEventListener('pointerleave', () => el.classList.remove('focus-pull'));
+    });
+  }
 })();
