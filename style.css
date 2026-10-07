@@ -66,3 +66,28 @@ body:before{content:"";position:fixed;inset:0;z-index:30;pointer-events:none;opa
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(2%,-3%)}50%{transform:translate(-3%,2%)}75%{transform:translate(3%,3%)}100%{transform:translate(-2%,-2%)}}
 @media(max-width:600px){.cursor-orb{display:none}.hero{clip-path:inset(0 round 0 0 10vw 0)}.hero-orbit{opacity:.5}.orbit-one{right:-18vw;top:18%}.orbit-two{right:9vw;top:36%}.hero h1{font-size:clamp(48px,13.5vw,75px)}.intro:before{right:22px;top:80px;font-size:7px}.intro .scene-ring{width:70vw;height:70vw;right:-28vw;bottom:-35vw}.tables{clip-path:polygon(0 5vw,100% 0,100% 100%,0 100%)}.experiences{clip-path:polygon(0 0,100% 5vw,100% 100%,0 100%)}.experience-card:nth-child(2),.experience-card:nth-child(2):hover{transform:none}.closing-cta{height:480px;clip-path:inset(5vw 0 0 round 11vw 0 0 0)}}
 @media(prefers-reduced-motion:reduce){.film-grain,.cursor-orb,.hero-orbit{display:none}.hero-photo{transform:scale(1.015)}.table-card:hover,.food-card:hover,.experience-card:hover{transform:none}.experience-card:nth-child(2){transform:none}.closing-cta>img{transform:scale(1.02)}}
+
+/* TOUCH / MOBILE MOTION PROFILE ------------------------------------------- */
+@media (max-width:720px), (pointer:coarse){
+  body:before{opacity:.06}
+  .film-grain{opacity:.018;animation-duration:1.2s}
+  .hero-photo{animation:revealPhoto 1.2s var(--ease) both;transform:scale(1.045);transition:transform .25s linear}
+  .hero-orbit{animation:none;opacity:.28;transform:none}
+  .orbit-one{width:62vw;height:62vw;right:-20vw;top:19%}
+  .orbit-two{width:39vw;height:39vw;right:12vw;top:38%;border-style:solid}
+  .hero-content:before{height:135px;top:-44px;opacity:.55}
+  .hero h1 span:first-child,.hero h1 span:nth-child(2){animation-duration:.75s}
+  .table-card,.food-card,.experience-card{transition:transform .45s var(--ease),border-color .45s,box-shadow .45s}
+  .table-card:hover,.food-card:hover,.experience-card:hover{transform:none;box-shadow:none}
+  .table-card:active,.food-card:active,.experience-card:active{transform:scale(.985);border-color:rgba(214,174,120,.58)}
+  .table-card img,.food-card img,.experience-card img{transition:transform .7s var(--ease),filter .6s var(--ease)}
+  .table-card:hover img,.food-card:hover img,.experience-card:hover img{transform:none;filter:saturate(.82) contrast(1.05)}
+  .closing-cta>img{transform:scale(1.035)}
+  .closing-cta:hover>img{transform:scale(1.035)}
+}
+@media (max-width:380px){
+  .hero h1{font-size:clamp(43px,13.1vw,58px)}
+  .hero-sub{max-width:220px}
+  .hero-orbit{opacity:.18}
+  .section-pad{padding-top:68px;padding-bottom:68px}
+}

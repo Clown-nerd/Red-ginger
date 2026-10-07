@@ -21,6 +21,12 @@
 - **Wordmark & logo:** retain the supplied logo as the trusted mark; frame it with a small copper orbit line in the motion layer rather than redrawing it.
 - **Signature brand color:** ember red `#c82430`.
 
+## Mobile optimization
+- Touch/coarse-pointer devices skip the desktop cursor orb, continuous cursor RAF loop, and JavaScript parallax listener.
+- Mobile keeps only short entrance/reveal motion, reduced-opacity grain, static orbit geometry, and tactile press feedback.
+- Desktop hover transforms are removed from touch layouts to avoid sticky hover states and unnecessary GPU work.
+- The existing reduced-motion media query remains the strongest override.
+
 ## Project structure
 - `index.html` — semantic page scenes and existing reservation/menu surfaces.
 - `style.css` — existing responsive system plus the cinematic motion layer.

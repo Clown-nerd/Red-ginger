@@ -99,7 +99,8 @@
 
   // Cinematic motion layer: intentionally lightweight and disabled for reduced-motion users.
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduced) {
+  const touchDevice = matchMedia('(pointer: coarse)').matches || innerWidth <= 720;
+  if (!reduced && !touchDevice) {
     const orb = $('.cursor-orb');
     let tx = innerWidth / 2, ty = innerHeight / 2, cx = tx, cy = ty;
     addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; document.documentElement.style.setProperty('--mx', `${(e.clientX / innerWidth - .5) * 2}`); document.documentElement.style.setProperty('--my', `${(e.clientY / innerHeight - .5) * 2}`); }, {passive:true});
